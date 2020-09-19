@@ -1,10 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Unit } from "./Unit";
 
+export type wordConfig = {
+  id?: number;
+  mean?: string;
+  kanji?: string;
+  romaji?: string;
+  type?: string;
+  voice?: string;
+  unitId?: number;
+  name?: string;
+  kanOto?: string;
+  index?: number;
+};
 @Entity()
-export class User {
+export class Word {
   @PrimaryGeneratedColumn()
   id: number;
-
+  @Column({ nullable: true })
+  index: number;
   @Column()
   name: string;
   @Column()
@@ -16,5 +30,13 @@ export class User {
   @Column()
   romaji: string;
   @Column({ nullable: true })
+  kanOto: string;
+  @Column({ nullable: true })
   voice: string;
+
+  @ManyToOne((type) => Unit, (unit) => unit.words, {
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+  })
+  unit: Unit;
 }
