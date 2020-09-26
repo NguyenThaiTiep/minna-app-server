@@ -31,6 +31,7 @@ module.exports.GetPracticeUnitWrite = async (req, res) => {
     res.send(HandelStatus(204));
     return;
   }
+
   var result = await GenQuestionWriteUnit(unitId, amount);
   res.send(result);
 };

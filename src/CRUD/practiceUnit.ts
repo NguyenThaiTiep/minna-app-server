@@ -7,11 +7,12 @@ import {
 } from "../untils/Random";
 import { GetAll } from "./alphabet";
 import { getUnitAndWordOfUnit } from "./unit";
-import { getById } from "./word";
+import { getById, getByIdAndUnitId } from "./word";
 
 export const GenQuestionWordItem = async (UnitId, id) => {
   var unit = await getUnitAndWordOfUnit(UnitId);
   var words = (unit.result as any).words;
+  var idU = (unit.result as any).id;
   var indexGet = id;
   var MaxMinIndex = GetIndexArrayRandom(indexGet, words);
   var array = randomIndexFromMaxMin(
@@ -23,7 +24,7 @@ export const GenQuestionWordItem = async (UnitId, id) => {
   var answerArr = [];
   for (var i = 0; i < array.length; i++) {
     var element = array[i];
-    var answer = await getById(element);
+    var answer = await getByIdAndUnitId(idU, element);
     if (answer.result) {
       answerArr.push({
         name: (answer.result as any).name,
@@ -61,6 +62,7 @@ export const GenQuestionWordUnit = async (unitId, amount) => {
 };
 export const GenQuestionWriteUnit = async (unitId, amount) => {
   var unit = await getUnitAndWordOfUnit(unitId);
+  var idU = (unit.result as any).id;
   if (!unit) {
     return HandelStatus(404);
   }
@@ -76,17 +78,17 @@ export const GenQuestionWriteUnit = async (unitId, amount) => {
   var questions = [];
   for (var i = 0; i < (array as any).length; i++) {
     var element = array[i];
-    var question = await GenQuestionWrite(element);
+    var question = await GenQuestionWrite(element, idU);
 
     questions.push(question);
   }
   return HandelStatus(200, null, { length: questions.length, questions });
 };
-const GenQuestionWrite = async (WordId) => {
+const GenQuestionWrite = async (WordId, unitId) => {
   var alphabetsResult = await GetAll();
   var alphabets = alphabetsResult.result;
   var indexGet = WordId;
-  var word = await getById(WordId);
+  var word = await getByIdAndUnitId(unitId, WordId);
   if (!word.result) return;
   var array = randomIndexFromMaxMin(
     (alphabets as any).length - 1,

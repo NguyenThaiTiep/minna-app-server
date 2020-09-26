@@ -44,6 +44,20 @@ export const getById = async (id) => {
   }
   return HandelStatus(200, null, word);
 };
+export const getByIdAndUnitId = async (unitId, id) => {
+  let WordRepo = getRepository(Word);
+
+  let word = await WordRepo.createQueryBuilder("word")
+    .innerJoinAndSelect("word.unit", "unit")
+    .where("unit.id = :id", { id: unitId })
+    .andWhere("word.index =:index", { index: id })
+    .getOne();
+
+  if (!word) {
+    return HandelStatus(404);
+  }
+  return HandelStatus(200, null, word);
+};
 export const removeById = async (id) => {
   let WordRepo = getRepository(Word);
   let word = await WordRepo.findOne({ id: id });

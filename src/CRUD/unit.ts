@@ -64,7 +64,7 @@ export const getUnitAndWordOfUnit = async (id) => {
   }
   var unitRes = await UnitRepo.createQueryBuilder("unit")
     .leftJoinAndSelect("unit.words", "word")
-    .where("unit.id = :id", { id: id })
+    .where("unit.index = :id", { id: id })
     .getOne();
   return HandelStatus(200, null, unitRes);
 };
