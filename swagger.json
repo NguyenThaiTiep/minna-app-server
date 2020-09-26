@@ -1,0 +1,49 @@
+{
+  "info": {
+    "title": "Node Swagger API",
+    "version": "1.0.0",
+    "description": "Demonstrating how to describe a RESTful API with Swagger",
+    "server": ["http:localhost:3001"]
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "swagger": "2.0",
+  "paths": {
+    "/alphabet": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/alphabet/create": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "items": {
+                "type": "string"
+              }
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "responses": {},
+  "parameters": {},
+  "securityDefinitions": {}
+}

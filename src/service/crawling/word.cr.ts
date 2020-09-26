@@ -21,6 +21,7 @@ export const CrawlWord = async (index) => {
         var unit = new Unit();
         unit.index = index;
         unit.name = `Bài ${index}`;
+        unit.kotoba = `http://eup.mobi/apps/mina/listen/${index} - 1 - Kotoba.mp3`;
         await UnitRepo.save(unit);
 
         for (var i = 0; i < result.length; i++) {

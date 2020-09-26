@@ -33,6 +33,10 @@ export const GetAll = async () => {
   let alphabets = await AlphabetRepo.find();
   return HandelStatus(200, null, alphabets);
 };
-module.exports.GetById = () => {};
+export const GetById = async (id) => {
+  let AlphabetRepo = getRepository(Alphabet);
+  let alphabet = await AlphabetRepo.findOne({ id: id });
+  return HandelStatus(200, null, alphabet);
+};
 module.exports.Update = () => {};
 module.exports.Delete = () => {};

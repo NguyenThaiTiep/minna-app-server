@@ -6,6 +6,7 @@ export type unitConfig = {
   name?: string;
   subject?: string;
   description?: string;
+  kotoba?: string;
 };
 @Entity()
 export class Unit {
@@ -20,6 +21,8 @@ export class Unit {
 
   @Column({ nullable: true })
   description: string;
+  @Column({ nullable: true })
+  kotoba: string;
   @OneToMany((type) => Word, (word) => word.unit, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",

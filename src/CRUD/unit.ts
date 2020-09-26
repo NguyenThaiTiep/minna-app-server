@@ -12,6 +12,7 @@ export const Create = async (unitConfig: unitConfig) => {
   unit.name = unitConfig.name;
   unit.subject = unitConfig.subject || null;
   unit.description = unitConfig.description || null;
+  unit.kotoba = unitConfig.kotoba || null;
   await UnitRepo.save(unit);
   var idU = unit.id;
   return HandelStatus(200, null, { id: idU });
